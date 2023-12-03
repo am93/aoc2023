@@ -1,0 +1,12 @@
+{
+  "name": "aoc-2023",
+  "version": "1.0.0",
+  "description": "Advent of code 2023 JS solutions",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
