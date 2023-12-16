@@ -1,4 +1,3 @@
-import { log } from 'console';
 import fs from 'fs'
 
 const MOVES = {'N': [-1, 0], 'W': [0, -1], 'S': [1, 0],'E': [0, 1]}
@@ -13,29 +12,12 @@ function ddIns(key, val, dict) {
 	return dict;
 }
 
-function ddGet(dict, key, deflt=[]) {
-	if(key in dict) return dict[key]
-	return deflt;
-}
-
 function partOne(layout, start) {
 	let maxRow = layout.length;
 	let maxCol = layout[0].length;
 	let beamWithDir = new Set()
   let beam = new Set()
   let toExplore = []
-	let blkByC = {}
-	let blkByR = {}
-  let idx = 0;
-	
-	for(let rowIdx = 0; rowIdx < maxRow; rowIdx++) {
-		for(let colIdx = 0; colIdx < maxCol; colIdx++) {
-			if(layout[rowIdx][colIdx] != '.'){
-				blkByC = ddIns(colIdx, [rowIdx, colIdx], blkByC);
-				blkByR = ddIns(rowIdx, [rowIdx, colIdx], blkByR);
-			}
-		}
-	}
 
   toExplore.push(start);
 
