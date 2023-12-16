@@ -6,12 +6,6 @@ const DIRMAP = {'\\E':['S'], '\\S':['E'], '\\N':['W'], '\\W':['N'],
                 '|N':['N'], '|S':['S'], '|E':['N','S'], '|W':['N','S'],
                 '-E':['E'], '-W':['W'], '-N':['E','W'], '-S':['E','W']};
 
-function ddIns(key, val, dict) {
-	if(key in dict) dict[key].push(val);
-	else dict[key] = [val];
-	return dict;
-}
-
 function partOne(layout, start) {
 	let maxRow = layout.length;
 	let maxCol = layout[0].length;
