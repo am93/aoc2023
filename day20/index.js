@@ -27,7 +27,6 @@ function pushButton(evalList, ff, cj, conns) {
   let [crr, p, tcj] = [null, null, null];
   while(evalList.length > 0){
     [crr, p, tcj] = evalList.shift();
-    if(crr == 'rx' & p == 0) turnedOn = true;
     counts[p] += 1;
     if(crr == 'output') continue;
     if(crr in ff){
@@ -41,6 +40,7 @@ function pushButton(evalList, ff, cj, conns) {
       for(let inp in tcj[crr]) {
         allHigh = allHigh & tcj[crr][inp];
       }
+      if(crr == 'rx' & (!allHigh/1) == 1) turnedOn = true; // manually change here for cycle detection
       evalList = pushToEval(crr, (!allHigh/1), conns, cj, tcj, evalList);
     }
     if(crr == 'broadcaster'){
@@ -80,10 +80,14 @@ function partOne(prop, loopCount) {
     }
   }
 
+  let loopStart = loopCount;
   while(loopCount > 0){
     loopCount--;
     cjIns = pushButton([['broadcaster', 0, structuredClone(cjIns)]], ff, cj, conns);
-    if(turnedOn) console.log(1000 - loop);
+    if(turnedOn) {
+      console.log(loopStart - loopCount);
+      turnedOn = false;
+    } 
   }
   return counts[0] * counts[1];
 }
@@ -92,4 +96,5 @@ const sample = fs.readFileSync('./sample.txt', 'utf-8').trim().split('\n');
 const input = fs.readFileSync('./input.txt', 'utf-8').trim().split('\n');
 console.log('Part 1 sample:', partOne(sample, 1000));
 console.log('Part 1       :', partOne(input, 1000));
-console.log('Part 2       :', partOne(input, 1000000000));
+// only used for detecting cycles in conjuctions closes to rx - solved manually :D 
+console.log('Part 2       :', partOne(input, 100000));
